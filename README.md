@@ -13,6 +13,8 @@ Its actually only for make nemo-desktop work in wayland background not open as w
 A. labwc
 - nano ~/.config/labwc/autostart edit nano, geanny of other text editor
 - put this in bellow anything 'nemo-desktop &'
+- wlogout or anything logout
+- Enter back and done
 
 Nemo
 ====
