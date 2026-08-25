@@ -10,6 +10,9 @@ Its actually only for make nemo-desktop work in wayland background not open as w
 - ninja -C build
 - sudo ninja -C build install
 
+A. labwc
+- nano ~/.config/labwc/autostart edit nano, geanny of other text editor
+- put this in bellow anything 'nemo-desktop &'
 
 Nemo
 ====
