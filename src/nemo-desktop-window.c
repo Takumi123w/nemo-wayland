@@ -189,11 +189,17 @@ nemo_desktop_window_init (NemoDesktopWindow *window)
 	gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (window)), "nemo-desktop-window");
 
     if (eel_check_is_wayland ()) {
-#ifdef HAVE_GTK_LAYER_SHELL
+ #ifdef HAVE_GTK_LAYER_SHELL
         gtk_layer_init_for_window (GTK_WINDOW (window));
-#endif
-    } else {
-        gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DESKTOP);
+        gtk_layer_set_layer (GTK_WINDOW (window), GTK_LAYER_SHELL_LAYER_BACKGROUND);
+        gtk_layer_set_anchor (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+        gtk_layer_set_anchor (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+        gtk_layer_set_anchor (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+        gtk_layer_set_anchor (GTK_WINDOW (window), GTK_LAYER_SHELL_EDGE_RIGHT, TRUE);
+        gtk_layer_set_keyboard_interactivity (GTK_WINDOW (window), FALSE);
+ #endif
+     } else {
+         gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DESKTOP);
     }
 }
 

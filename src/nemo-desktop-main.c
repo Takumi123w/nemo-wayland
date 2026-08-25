@@ -125,12 +125,10 @@ main (int argc, char *argv[])
 	}
 	else
 	{
-		g_message ("nemo-desktop: Not a Wayland session, or wlr-layer-shell protocol not supported, using X11 backend");
-		gdk_set_allowed_backends ("x11");
+		g_message ("nemo-desktop: Layer shell protocol not detected, proceeding with default backends");
 	}
 #else
-	g_message ("nemo-desktop: using X11");
-	gdk_set_allowed_backends ("x11");
+	g_message ("nemo-desktop: running without compile-time layer-shell support");
 #endif
 
 #ifdef HAVE_EXEMPI
