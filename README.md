@@ -1,9 +1,9 @@
 ![build](https://github.com/linuxmint/nemo/actions/workflows/build.yml/badge.svg)
 
-Its actually only for make nemo-desktop work in wayland background not open as windowed mode when in wayland
+Its actually only for make nemo-desktop work in wayland background not open as windowed mode when in wayland actually its just personal taste since i use labwc
 
 # Compile step
-- https://github.com/Takumi123w/nemo-wayland.git
+- git clone https://github.com/Takumi123w/nemo-wayland.git
 - sudo pacman -S --needed base-devel meson ninja pkgconf intltool gobject-introspection glib2 gtk3 json-glib libx11 xapp libexif exempi pango libgsf gtk-layer-shell
 - cd nemo
 - meson setup build -Dgtk_layer_shell=true
