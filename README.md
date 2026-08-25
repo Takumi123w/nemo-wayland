@@ -1,5 +1,16 @@
 ![build](https://github.com/linuxmint/nemo/actions/workflows/build.yml/badge.svg)
 
+Its actually only for make nemo-desktop work in wayland background not open as windowed mode when in wayland
+
+# Compile step
+
+sudo pacman -S --needed base-devel meson ninja pkgconf intltool gobject-introspection glib2 gtk3 json-glib libx11 xapp libexif exempi pango libgsf gtk-layer-shell
+cd nemo
+meson setup build -Dgtk_layer_shell=true
+ninja -C build
+sudo ninja -C build install
+
+
 Nemo
 ====
 Nemo is a free and open-source software and official file manager of the Cinnamon desktop environment. 
@@ -7,9 +18,6 @@ It is a fork of GNOME Files (formerly named Nautilus).
 
 Nemo also manages the Cinnamon desktop.
 Since Cinnamon 6.0 (Mint 21.3), users can enhance their own Nemo with Spices named Actions.
-
-# Make sure
-gtk layer shell already installed
 
 History
 ====
