@@ -7205,11 +7205,28 @@ open_as_admin (NemoView *view, const gchar *path) {
     nemo_window_slot_open_location (view->details->slot, location, 0);
 }
 
+// basically its bug in my system for use admin sometimes wayland broken the password gui instead better use terminal
+// also to be honest i need write bin sometimes for access root its better
+static void
+open_as_root_term (NemoView *view, const gchar *path) {
+        gchar *argv[] = {
+            (gchar *) "alacritty",
+            (gchar *) "-e",
+            (gchar *) "sudo",
+            (gchar *) "-E",
+            (gchar *) "setsid",
+            (gchar *) "nemo",
+            (gchar *) path,
+            NULL
+        };
+        g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
+}
+
 static void
 open_as_root (NemoView *view, const gchar *path)
 {
     if (eel_check_is_wayland ()) {
-        open_as_admin (view, path);
+        open_as_root_term (view, path);
         return;
     }
 
@@ -7225,29 +7242,16 @@ open_as_root (NemoView *view, const gchar *path)
     g_free (argv[2]);
 }
 
+// its labwc default package include with alacritty without gnome ui for set default terminal
 static void
 open_in_terminal (const gchar *path)
 {
-    gchar *gsetting_terminal;
-    gchar **token;
-    gchar **argv;
-    gint i;
-
-    gsetting_terminal = g_settings_get_string (gnome_terminal_preferences,
-                                               GNOME_DESKTOP_TERMINAL_EXEC);
-
-    token = g_strsplit (gsetting_terminal, " ", 0);
-    argv = g_new (gchar *, g_strv_length (token) + 1);
-    for (i = 0; token[i] != NULL; i++) {
-        argv[i] = token[i];
-    }
-    argv[i] = NULL;
+	gchar *argv[] = {
+        (gchar *) "alacritty",
+    	NULL
+    };
 
     g_spawn_async (path, argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
-
-    g_free (gsetting_terminal);
-    g_strfreev (token);
-    g_free (argv);
 }
 
 static void
